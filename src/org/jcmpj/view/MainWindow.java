@@ -1,5 +1,6 @@
 package org.jcmpj.view;
 
+import java.awt.Color;
 import java.awt.Toolkit;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -7,6 +8,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.jcmpj.controller.Docx;
 import org.jcmpj.controller.IniciarAtualizacao;
+import org.jcmpj.resources.Global;
 import org.jcmpj.resources.WindowManager;
 
 /**
@@ -79,8 +81,8 @@ public class MainWindow extends javax.swing.JFrame {
         deleteMenuItem = new javax.swing.JMenuItem();
         documentosMenu = new javax.swing.JMenu();
         abrirDocumentoMenuItem = new javax.swing.JMenuItem();
-        helpMenu = new javax.swing.JMenu();
-        contentMenuItem = new javax.swing.JMenuItem();
+        sobreMenu = new javax.swing.JMenu();
+        usuarioMenu = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -300,18 +302,23 @@ public class MainWindow extends javax.swing.JFrame {
 
         menuBar.add(documentosMenu);
 
-        helpMenu.setMnemonic('h');
-        helpMenu.setText("Help");
+        sobreMenu.setMnemonic('h');
+        sobreMenu.setText("Sobre");
 
-        contentMenuItem.setMnemonic('c');
-        contentMenuItem.setText("Contents");
-        helpMenu.add(contentMenuItem);
+        usuarioMenu.setMnemonic('c');
+        usuarioMenu.setText("Usuário");
+        usuarioMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usuarioMenuActionPerformed(evt);
+            }
+        });
+        sobreMenu.add(usuarioMenu);
 
         aboutMenuItem.setMnemonic('a');
         aboutMenuItem.setText("About");
-        helpMenu.add(aboutMenuItem);
+        sobreMenu.add(aboutMenuItem);
 
-        menuBar.add(helpMenu);
+        menuBar.add(sobreMenu);
 
         setJMenuBar(menuBar);
 
@@ -398,6 +405,26 @@ public class MainWindow extends javax.swing.JFrame {
         windowManager.openWindow(Quesitos.getInstance());
     }//GEN-LAST:event_btnQuesitosActionPerformed
 
+    private void usuarioMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioMenuActionPerformed
+        DadosUsuario dadosUsuario = new DadosUsuario(this, true);
+        Color backColor = new Color(254,254,254);
+        dadosUsuario.getContentPane().setBackground(backColor);
+        String cpf = Global.getUserName();
+        dadosUsuario.lblCPF.setText(cpf);
+        dadosUsuario.lblNOME.setText(Global.getName());
+        
+        /**
+         * Formatar para apresentação a data de validade(expiração) da licença
+         */
+        String valid = Global.getExpires();
+        String[] amd = valid.split("-");
+        String dma = amd[2] + "/" + amd[1] + "/" + amd[0];        
+        dadosUsuario.lblVALID.setText(dma);
+        
+        dadosUsuario.lblSERIAL.setText(Global.getSerial());        
+        dadosUsuario.setVisible(true);
+    }//GEN-LAST:event_usuarioMenuActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -445,12 +472,10 @@ public class MainWindow extends javax.swing.JFrame {
     public static javax.swing.JButton btnAtividades;
     public static javax.swing.JButton btnDadosBasicos;
     public static javax.swing.JButton btnQuesitos;
-    private javax.swing.JMenuItem contentMenuItem;
     private javax.swing.JMenuItem deleteMenuItem;
     public javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu documentosMenu;
     private javax.swing.JMenuItem exitMenuItem;
-    private javax.swing.JMenu helpMenu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -459,6 +484,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenu laudosMenu;
     private javax.swing.JMenuItem laudosMenuItem;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenu sobreMenu;
+    private javax.swing.JMenuItem usuarioMenu;
     // End of variables declaration//GEN-END:variables
 
     private void setIcon() {

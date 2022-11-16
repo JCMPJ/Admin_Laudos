@@ -5,10 +5,10 @@ package org.jcmpj.controller;
  * @author jcmpj
  */
 /**
- * import org.apache.commons.io.FileUtils;
- * import org.apache.commons.io.FilenameUtils;
- * import com.microsoft.playwright.*;
- **/
+ * import org.apache.commons.io.FileUtils; import
+ * org.apache.commons.io.FilenameUtils; import com.microsoft.playwright.*;
+ *
+ */
 import com.microsoft.playwright.*;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -26,10 +26,11 @@ public class AcessarWeb implements Runnable {
     private boolean ultimaPagina;
     private final String nome;
     private final Inicio ini;
+
     /**
-     * 
+     *
      * @param nome
-     * @param ini 
+     * @param ini
      */
     public AcessarWeb(String nome, Inicio ini) {
         listaDados = new ArrayList<>();
@@ -54,20 +55,36 @@ public class AcessarWeb implements Runnable {
             String password = Global.getPassword();
             // String username = "45938024900";
             // String password = "Borba1905@";
-            
+
             page.fill("xpath=//*[@id=\"username\"]", username);
             page.fill("xpath=//*[@id=\"password\"]", password);
             page.locator("xpath=//*[@id=\"btnEntrar\"]").click();
             //page.locator("/html/body/pje-root/mat-sidenav-container/mat-sidenav-content/div/pje-cabecalho/div/mat-toolbar/section[2]/pje-cabecalho-perfil/div/button[1]").click();
             tempo(1);
             /* Botão trocar orgão julgador ou papel */
-            page.locator("xpath=/html/body/pje-root/mat-sidenav-container/mat-sidenav-content/div/pje-cabecalho/div/mat-toolbar/section[2]/pje-cabecalho-perfil/div/button[1]").click();
+            /**
+             * Alteração em virtude da atualização do sistema PJe para a versão
+             * 2.8.4 em 25 de outubro de 2022 *
+             * page.locator("xpath=/html/body/pje-root/mat-sidenav-container/mat-sidenav-content/div/pje-cabecalho/div/mat-toolbar/section[2]/pje-cabecalho-perfil/div/button[1]").click();
+             */
+            page.locator("xpath=/html/body/pje-root/mat-sidenav-container/mat-sidenav-content/pje-cabecalho/div/mat-toolbar/section[2]/pje-cabecalho-perfil/div/button[1]/span[1]/div").click();
             tempo(1);
             /* Botão promover para Perito */
-            page.locator("xpath=//button[contains(text(), 'Perito')]").click();
+            /**
+             * Alteração em virtude da atualização do sistema PJe para a versão
+             * 2.8.4 em 25 de outubro de 2022 *
+             * page.locator("xpath=//button[contains(text(),
+             * 'Perito')]").click();
+             */
+            page.locator("xpath=//*[@id=\"mat-menu-panel-0\"]/div/div[2]/button").click();
             tempo(1);
             /* Botão Aguardando Laudo */
-            page.locator("xpath=/html/body/pje-root/mat-sidenav-container/mat-sidenav-content/div/div/div/pje-home-perito/div/div/ng-component/div[2]/pje-painel-item[3]/div/mat-card").click();
+            /**
+             * Alteração em virtude da atualização do sistema PJe para a versão
+             * 2.8.4 em 25 de outubro de 2022 *
+             * page.locator("xpath=/html/body/pje-root/mat-sidenav-container/mat-sidenav-content/div/div/div/pje-home-perito/div/div/ng-component/div[2]/pje-painel-item[3]/div/mat-card").click();
+             */
+            page.locator("xpath=/html/body/pje-root/mat-sidenav-container/mat-sidenav-content/div/div/pje-home-perito/div/div/ng-component/div[2]/pje-painel-item[3]/div/mat-card").click();
             tempo(1);
             /**
              * Captura da lista de processos em uma certa página
@@ -81,8 +98,23 @@ public class AcessarWeb implements Runnable {
                      */
                     pag++;
                     ini.setStatus("Lendo página: " + pag);
-                    Locator rows = (Locator) page.locator("//pje-celula-dados-basicos-processo");
-
+                    if (!page.isVisible("xpath=/html/body/pje-root/mat-sidenav-container/mat-sidenav-content/div/div/pje-home-perito/div/div/ng-component/mat-card/mat-card-content/pje-data-table/div[2]/pje-paginador/div/span[4]/button[3][not (@disabled)]")) {
+                        ultimaPagina = false;
+                    }
+                    /**
+                     * Alteração em virtude da atualização do sistema PJe para a
+                     * versão 2.8.4 em 25 de outubro de 2022 * Locator rows =
+                     * (Locator)
+                     * page.locator("//pje-celula-dados-basicos-processo");
+                     * //*[@id="cdk-drop-list-0"]/tr/td[2]/pje-celula-dados-basicos-processo/div/div/div[1]
+                     * -- reclamante x reclamada sem o número do processo
+                     * //*[@id="cdk-drop-list-0"]/tr/td[2]/pje-celula-dados-basicos-processo/div
+                     * -- com o número do processo
+                     * //*[@id="cdk-drop-list-0"]/tr/td[2]/pje-celula-dados-basicos-processo/div/div/a
+                     * -- apenas o número do processdo
+                     *
+                     */
+                    Locator rows = (Locator) page.locator("//*[@id=\"cdk-drop-list-0\"]/tr/td[2]/pje-celula-dados-basicos-processo/div");
                     /**
                      * Constroi um ArrayList(listaDados) que será usado para
                      * gerar um arquivo .txt e posterior atualização do banco de
@@ -98,11 +130,16 @@ public class AcessarWeb implements Runnable {
                 }
                 tempo(1);
                 /* Botão próxima página */
-                page.locator("//button[@aria-label=\"Próximo\"][not (@disabled)]").click();
-                tempo(1);
-                if (!page.isVisible("//button[@aria-label=\"Próximo\"][not (@disabled)]")) {
-                    ultimaPagina = false;
+                /**
+                 * Alteração em virtude da atualização do sistema PJe para a
+                 * versão 2.8.4 em 25 de outubro de 2022 *
+                 * page.locator("//button[@aria-label=\"Próximo\"][not
+                 * (@disabled)]").click();
+                 */
+                if (ultimaPagina) {
+                    page.locator("xpath=/html/body/pje-root/mat-sidenav-container/mat-sidenav-content/div/div/pje-home-perito/div/div/ng-component/mat-card/mat-card-content/pje-data-table/div[2]/pje-paginador/div/span[4]/button[3][not (@disabled)]").click();
                 }
+                tempo(1);
             }
             write(listaDados);
             //tempo(5);
@@ -111,6 +148,7 @@ public class AcessarWeb implements Runnable {
 
     /**
      * Tempo t em segundos
+     *
      * @param t
      */
     private static void tempo(int t) {
@@ -121,10 +159,12 @@ public class AcessarWeb implements Runnable {
             Logger.getLogger(Playwright.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     /**
      * Gerar o arquivo texto que será usado posteriormente pela classe
      * AtualizarBancoDados
-     * @param linha 
+     *
+     * @param linha
      */
     private static void write(ArrayList<String> linha) {
 
