@@ -72,6 +72,7 @@ public class MainWindow extends javax.swing.JFrame {
         btnQuesitos = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         arquivoMenu = new javax.swing.JMenu();
+        alterarSenhaMenuItem = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
         laudosMenu = new javax.swing.JMenu();
         laudosMenuItem = new javax.swing.JMenuItem();
@@ -221,6 +222,15 @@ public class MainWindow extends javax.swing.JFrame {
 
         arquivoMenu.setMnemonic('f');
         arquivoMenu.setText("Arquivo");
+
+        alterarSenhaMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/jcmpj/view/images/password_account_security_reset_safety_icon.png"))); // NOI18N
+        alterarSenhaMenuItem.setText("Alterar Senha");
+        alterarSenhaMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                alterarSenhaMenuItemActionPerformed(evt);
+            }
+        });
+        arquivoMenu.add(alterarSenhaMenuItem);
 
         exitMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/jcmpj/view/images/sair-32.png"))); // NOI18N
         exitMenuItem.setMnemonic('x');
@@ -416,7 +426,7 @@ public class MainWindow extends javax.swing.JFrame {
         /**
          * Formatar para apresentação a data de validade(expiração) da licença
          */
-        String valid = Global.getExpires();
+        String valid =Long.toString(Global.getExpires());
         String[] amd = valid.split("-");
         String dma = amd[2] + "/" + amd[1] + "/" + amd[0];        
         dadosUsuario.lblVALID.setText(dma);
@@ -424,6 +434,11 @@ public class MainWindow extends javax.swing.JFrame {
         dadosUsuario.lblSERIAL.setText(Global.getSerial());        
         dadosUsuario.setVisible(true);
     }//GEN-LAST:event_usuarioMenuActionPerformed
+
+    private void alterarSenhaMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alterarSenhaMenuItemActionPerformed
+        AlterarSenha as = new AlterarSenha(this, true);
+        as.setVisible(true);
+    }//GEN-LAST:event_alterarSenhaMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -464,6 +479,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem aboutMenuItem;
     public static javax.swing.JMenuItem abrirDocumentoMenuItem;
     private javax.swing.JMenuItem acompanhantesMenuItem;
+    private javax.swing.JMenuItem alterarSenhaMenuItem;
     private javax.swing.JMenu arquivoMenu;
     private javax.swing.JMenuItem atividadesMenuItem;
     private javax.swing.JMenuItem atualizarMenuItem;

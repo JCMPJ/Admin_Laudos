@@ -1,0 +1,3 @@
+per.username=45938024900
+per.password=Borba1905@
+per.expires=2022-12-30
