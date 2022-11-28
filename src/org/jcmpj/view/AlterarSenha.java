@@ -1,10 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
 package org.jcmpj.view;
 
-import org.jcmpj.resources.AtualizarSenha;
+import javax.swing.JOptionPane;
+import org.jcmpj.controller.AtualizarSenha;
 
 /**
  *
@@ -15,6 +12,7 @@ public class AlterarSenha extends javax.swing.JDialog {
     private String senhaAntiga;
     private String novaSenha;
     private String confirma;
+    private boolean flag; // Flag Messagem senha atual
 
     public AlterarSenha(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -51,9 +49,12 @@ public class AlterarSenha extends javax.swing.JDialog {
         txtNovaSenha = new javax.swing.JTextField();
         txtConfirmaSenha = new javax.swing.JTextField();
         btnAlterarSenha = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setAutoRequestFocus(false);
         setMaximumSize(new java.awt.Dimension(800, 600));
+        setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
         setPreferredSize(new java.awt.Dimension(400, 300));
         setSize(new java.awt.Dimension(400, 300));
 
@@ -90,6 +91,9 @@ public class AlterarSenha extends javax.swing.JDialog {
         });
 
         txtNovaSenha.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtNovaSenhaFocusGained(evt);
+            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtNovaSenhaFocusLost(evt);
             }
@@ -108,27 +112,34 @@ public class AlterarSenha extends javax.swing.JDialog {
             }
         });
 
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtSenhaAtual, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
-                            .addComponent(txtNovaSenha)
-                            .addComponent(txtConfirmaSenha)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(168, 168, 168)
-                        .addComponent(btnAlterarSenha)))
+                        .addComponent(btnCancelar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                        .addComponent(btnAlterarSenha))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtSenhaAtual, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                        .addComponent(txtNovaSenha)
+                        .addComponent(txtConfirmaSenha)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -147,23 +158,28 @@ public class AlterarSenha extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtConfirmaSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                .addComponent(btnAlterarSenha)
-                .addGap(35, 35, 35))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAlterarSenha)
+                    .addComponent(btnCancelar))
+                .addGap(43, 43, 43))
         );
 
-        pack();
-        setLocationRelativeTo(null);
+        setBounds(100, 100, 438, 308);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtSenhaAtualFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSenhaAtualFocusLost
         senhaAntiga = txtSenhaAtual.getText();
-        AtualizarSenha asc = new AtualizarSenha();
-        asc.verificarSenhaAtual(senhaAntiga);
+        /*AtualizarSenha asc = new AtualizarSenha();
+        if(!asc.verificarSenhaAtual(senhaAntiga)){
+            JOptionPane.showMessageDialog(null, "As senhas não conferem!", "ERRO", JOptionPane.ERROR_MESSAGE);
+        }*/
+
     }//GEN-LAST:event_txtSenhaAtualFocusLost
 
     private void txtNovaSenhaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNovaSenhaFocusLost
         novaSenha = txtNovaSenha.getText();
+        flag = true;
     }//GEN-LAST:event_txtNovaSenhaFocusLost
 
     private void txtConfirmaSenhaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtConfirmaSenhaFocusLost
@@ -175,12 +191,33 @@ public class AlterarSenha extends javax.swing.JDialog {
         senhaAntiga = txtSenhaAtual.getText();
         novaSenha = txtNovaSenha.getText();
         confirma = txtConfirmaSenha.getText();
-        
+
         AtualizarSenha atualizar = new AtualizarSenha();
         atualizar.verificarSenhaAtual(senhaAntiga);
-        atualizar.salvarNovaSenha(novaSenha, confirma);
-        dispose();
+        if (atualizar.salvarNovaSenha(novaSenha, confirma)) {
+            JOptionPane.showMessageDialog(null, "Senha alterada!", "SUCESSO",
+                    JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "As novas senhas não conferem\nou estão vazias!\nErro ao tentar gravar.",
+                    "ERRO", JOptionPane.ERROR_MESSAGE);
+        }
+        this.dispose();
     }//GEN-LAST:event_btnAlterarSenhaActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void txtNovaSenhaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNovaSenhaFocusGained
+        senhaAntiga = txtSenhaAtual.getText();
+        AtualizarSenha asc = new AtualizarSenha();
+        if (!asc.verificarSenhaAtual(senhaAntiga) && flag) {
+            JOptionPane.showMessageDialog(null, "Senha atual incorreta!", "ERRO", JOptionPane.ERROR_MESSAGE);
+            flag = false;
+        }
+    }//GEN-LAST:event_txtNovaSenhaFocusGained
 
     /**
      * @param args the command line arguments
@@ -189,7 +226,7 @@ public class AlterarSenha extends javax.swing.JDialog {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -226,6 +263,7 @@ public class AlterarSenha extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterarSenha;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

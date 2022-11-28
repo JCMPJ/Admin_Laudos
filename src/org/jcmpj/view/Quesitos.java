@@ -109,9 +109,10 @@ public class Quesitos extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setTitle("Lista de Acompanhantes / Testemunhas");
+        setMaximumSize(new java.awt.Dimension(1024, 2147483647));
         setPreferredSize(new java.awt.Dimension(1024, 603));
 
-        jPanel1.setLayout(new java.awt.BorderLayout());
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnSalvarAtividades.setText("Salvar Alterações");
         btnSalvarAtividades.addActionListener(new java.awt.event.ActionListener() {
@@ -119,7 +120,7 @@ public class Quesitos extends javax.swing.JInternalFrame {
                 btnSalvarAtividadesActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSalvarAtividades, java.awt.BorderLayout.CENTER);
+        jPanel1.add(btnSalvarAtividades, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 0, -1, 40));
 
         jScrollPane3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 153, 153)), "Quesitos Reclamante", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Liberation Sans", 3, 18), new java.awt.Color(0, 153, 153))); // NOI18N
 
@@ -151,7 +152,7 @@ public class Quesitos extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10))
             .addGroup(layout.createSequentialGroup()
@@ -171,7 +172,7 @@ public class Quesitos extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        pack();
+        setBounds(0, 0, 1024, 603);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarAtividadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarAtividadesActionPerformed

@@ -5,12 +5,14 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jcmpj.controller.AcessarWeb;
 import org.jcmpj.controller.AtualizarBancoDados;
 import org.jcmpj.model.DBManager;
 import org.jcmpj.resources.Global;
+import org.jcmpj.resources.LoadResources;
 
 /**
  *
@@ -143,6 +145,7 @@ public class Inicio extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Laudos TRT");
         setAlwaysOnTop(true);
+        setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
         setName("FrameLaudos"); // NOI18N
         setPreferredSize(new java.awt.Dimension(400, 300));
         setSize(new java.awt.Dimension(400, 300));
@@ -235,8 +238,7 @@ public class Inicio extends javax.swing.JFrame {
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(440, 341));
-        setLocationRelativeTo(null);
+        setBounds(200, 200, 440, 341);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNaoAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNaoAtualizarActionPerformed
@@ -248,7 +250,8 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        AlterarSenha as = new AlterarSenha(this, true);
+        AlterarSenha as = new AlterarSenha(this, false);
+        as.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         as.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -297,6 +300,11 @@ public class Inicio extends javax.swing.JFrame {
 
     private void setIcon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/org/jcmpj/view/images/ico-jc.png")));
+        
+        LoadResources loadResources = new LoadResources();
+        Properties prop = loadResources.loadPropertiesFile("per.properties");
+        prop.setProperty("per.serial", "951/2022");
+        
         setExpires();
     }
     

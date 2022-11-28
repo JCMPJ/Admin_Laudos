@@ -108,11 +108,9 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(0, 51, 51));
         jPanel2.setForeground(new java.awt.Color(0, 51, 51));
 
-        btnAcompanhantes.setBackground(new java.awt.Color(0, 0, 153));
-        btnAcompanhantes.setForeground(new java.awt.Color(255, 255, 255));
+        btnAcompanhantes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAcompanhantes.setText("Acompanhantes");
-        btnAcompanhantes.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, java.awt.Color.lightGray, null, null));
-        btnAcompanhantes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnAcompanhantes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAcompanhantes.setEnabled(false);
         btnAcompanhantes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,11 +118,9 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        btnAtividades.setBackground(new java.awt.Color(0, 0, 153));
-        btnAtividades.setForeground(new java.awt.Color(255, 255, 255));
+        btnAtividades.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAtividades.setText("Atividades");
-        btnAtividades.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, java.awt.Color.lightGray, null, null));
-        btnAtividades.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnAtividades.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAtividades.setEnabled(false);
         btnAtividades.setHideActionText(true);
         btnAtividades.addActionListener(new java.awt.event.ActionListener() {
@@ -133,12 +129,11 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        btnAbrirLaudo.setBackground(new java.awt.Color(0, 0, 153));
-        btnAbrirLaudo.setForeground(new java.awt.Color(255, 255, 255));
+        btnAbrirLaudo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAbrirLaudo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/jcmpj/view/images/novo-documento-32.png"))); // NOI18N
         btnAbrirLaudo.setText("Abrir Laudo");
         btnAbrirLaudo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 153)));
-        btnAbrirLaudo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnAbrirLaudo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAbrirLaudo.setEnabled(false);
         btnAbrirLaudo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,11 +141,9 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        btnDadosBasicos.setBackground(new java.awt.Color(0, 0, 153));
-        btnDadosBasicos.setForeground(new java.awt.Color(255, 255, 255));
+        btnDadosBasicos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnDadosBasicos.setText("Dados Básicos");
-        btnDadosBasicos.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, java.awt.Color.lightGray, null, null));
-        btnDadosBasicos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnDadosBasicos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDadosBasicos.setEnabled(false);
         btnDadosBasicos.setHideActionText(true);
         btnDadosBasicos.addActionListener(new java.awt.event.ActionListener() {
@@ -159,11 +152,9 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        btnQuesitos.setBackground(new java.awt.Color(0, 0, 153));
-        btnQuesitos.setForeground(new java.awt.Color(255, 255, 255));
+        btnQuesitos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnQuesitos.setText("Quesitos");
-        btnQuesitos.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, java.awt.Color.lightGray, null, null));
-        btnQuesitos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnQuesitos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnQuesitos.setEnabled(false);
         btnQuesitos.setHideActionText(true);
         btnQuesitos.addActionListener(new java.awt.event.ActionListener() {
@@ -192,8 +183,8 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(btnAbrirLaudo)
+                .addGap(26, 26, 26)
+                .addComponent(btnAbrirLaudo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -205,19 +196,19 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnDadosBasicos)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAtividades)
-                .addGap(18, 18, 18)
+                .addGap(12, 12, 12)
                 .addComponent(btnAcompanhantes)
-                .addGap(11, 11, 11)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnQuesitos))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnQuesitos)
+                .addGap(1, 1, 1)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnAbrirLaudo)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(336, Short.MAX_VALUE))
         );
 
         arquivoMenu.setMnemonic('f');
@@ -339,7 +330,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1035, Short.MAX_VALUE))
+                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1029, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -465,6 +456,9 @@ public class MainWindow extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

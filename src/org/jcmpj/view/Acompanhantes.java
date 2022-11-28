@@ -100,6 +100,7 @@ public class Acompanhantes extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         btnSalvarAtividades = new javax.swing.JButton();
+        btnProximoQuesitos = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtAreaReclamante = new javax.swing.JTextArea();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -111,7 +112,7 @@ public class Acompanhantes extends javax.swing.JInternalFrame {
         setTitle("Lista de Acompanhantes / Testemunhas");
         setPreferredSize(new java.awt.Dimension(1024, 603));
 
-        jPanel1.setLayout(new java.awt.BorderLayout());
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnSalvarAtividades.setText("Salvar Alterações");
         btnSalvarAtividades.addActionListener(new java.awt.event.ActionListener() {
@@ -119,7 +120,15 @@ public class Acompanhantes extends javax.swing.JInternalFrame {
                 btnSalvarAtividadesActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSalvarAtividades, java.awt.BorderLayout.CENTER);
+        jPanel1.add(btnSalvarAtividades, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 2, 240, 40));
+
+        btnProximoQuesitos.setText("Próximo");
+        btnProximoQuesitos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProximoQuesitosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnProximoQuesitos, new org.netbeans.lib.awtextra.AbsoluteConstraints(895, 2, 90, 40));
 
         jScrollPane3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 153, 153)), "Acompanhantes Reclamante", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Liberation Sans", 3, 18), new java.awt.Color(0, 153, 153))); // NOI18N
 
@@ -151,7 +160,7 @@ public class Acompanhantes extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10))
             .addGroup(layout.createSequentialGroup()
@@ -166,9 +175,9 @@ public class Acompanhantes extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
                     .addComponent(jScrollPane4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(15, 15, 15))
         );
 
         pack();
@@ -186,8 +195,16 @@ public class Acompanhantes extends javax.swing.JInternalFrame {
         addLineBreak(evt.getKeyCode(), txtAreaReclamada.getText(), "txtAreaReclamda");
     }//GEN-LAST:event_txtAreaReclamadaKeyReleased
 
+    private void btnProximoQuesitosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProximoQuesitosActionPerformed
+        if (windowManager == null) {
+            windowManager = new WindowManager(getDesktopPane());
+        }
+        windowManager.openWindow(Quesitos.getInstance());
+    }//GEN-LAST:event_btnProximoQuesitosActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnProximoQuesitos;
     private javax.swing.JButton btnSalvarAtividades;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane3;
