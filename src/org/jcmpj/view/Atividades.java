@@ -5,13 +5,15 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 import org.jcmpj.controller.PreencherForm;
 import org.jcmpj.model.DBManager;
+import org.jcmpj.resources.IsNotSaveAll;
 import org.jcmpj.resources.WindowManager;
 
 /**
  *
  * @author jcmpj
  */
-public class Atividades extends javax.swing.JInternalFrame {
+public class Atividades extends javax.swing.JInternalFrame implements IsNotSaveAll {
+
     private WindowManager windowManager;
     private String id;
     private static Atividades atividades;
@@ -43,7 +45,6 @@ public class Atividades extends javax.swing.JInternalFrame {
 
         // txtReclamada.setText("Reclamada: " + nomeReclamada);
         // txtReclamante.setText("Reclamante: " + nomeReclamante);
-        
         String titReclamante;
         titReclamante = "Atividades reclamante: " + nomeReclamante;
         jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(
@@ -52,21 +53,21 @@ public class Atividades extends javax.swing.JInternalFrame {
                 javax.swing.border.TitledBorder.DEFAULT_POSITION,
                 new java.awt.Font("Liberation Sans", 3, 15),
                 new java.awt.Color(0, 153, 153)));
-        
+
         String titReclamada;
         titReclamada = "Atividades reclamada: " + nomeReclamada;
         jScrollPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(
-			new java.awt.Color(0, 153, 153)), titReclamada,
-			javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
-			javax.swing.border.TitledBorder.DEFAULT_POSITION,
-			new java.awt.Font("Liberation Sans", 3, 15),
-			new java.awt.Color(0, 153, 153)));
-        
+                new java.awt.Color(0, 153, 153)), titReclamada,
+                javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
+                javax.swing.border.TitledBorder.DEFAULT_POSITION,
+                new java.awt.Font("Liberation Sans", 3, 15),
+                new java.awt.Color(0, 153, 153)));
+
         Map<String, String> txt = DBManager.getActivities(id);
         txtAreaReclamante.setText(txt.get("atividadesReclamante"));
         txtAreaReclamada.setText(txt.get("atividadesReclamada"));
     }
-    
+
     private void addLineBreak(int c, String anterior, String txtArea) {
         String txt = anterior.trim() + "\n";
         //txt = txt.trim();
@@ -78,19 +79,20 @@ public class Atividades extends javax.swing.JInternalFrame {
             }
         }
     }
-    
-    private void saveText() {
+
+    private void saveText(boolean saveAll) {
         boolean up;
-        up = DBManager.updateActivities(txtAreaReclamante.getText(), 
+        up = DBManager.updateActivities(txtAreaReclamante.getText(),
                 txtAreaReclamada.getText(),
                 txtAreaDescLocalTrabalho.getText(),
                 Integer.parseInt(id));
-        if (up) {
+        if (up && !saveAll) {
             JOptionPane.showMessageDialog(null, "Textos Atualizados\nno banco de dados", "Update", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "Erro\nbanco de dados", "Error", JOptionPane.ERROR_MESSAGE);
-        }        
+        }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -204,7 +206,7 @@ public class Atividades extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarAtividadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarAtividadesActionPerformed
-        saveText();
+        saveText(false);
     }//GEN-LAST:event_btnSalvarAtividadesActionPerformed
 
     private void txtAreaReclamanteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAreaReclamanteKeyReleased
@@ -219,6 +221,7 @@ public class Atividades extends javax.swing.JInternalFrame {
         if (windowManager == null) {
             windowManager = new WindowManager(getDesktopPane());
         }
+        windowManager.setFlagGlabalSaveAll(true);
         windowManager.openWindow(Acompanhantes.getInstance());
     }//GEN-LAST:event_btnProximoAcompanhantesActionPerformed
 
@@ -234,4 +237,11 @@ public class Atividades extends javax.swing.JInternalFrame {
     public javax.swing.JTextArea txtAreaReclamada;
     public javax.swing.JTextArea txtAreaReclamante;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void saveAll() {
+        // throw new UnsupportedOperationException("Not supported yet.");
+        saveText(true);
+
+    }
 }

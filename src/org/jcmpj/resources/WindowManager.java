@@ -4,8 +4,13 @@
  */
 package org.jcmpj.resources;
 
+import java.util.ArrayList;
 import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
+import org.jcmpj.view.Acompanhantes;
+import org.jcmpj.view.Atividades;
+import org.jcmpj.view.Listagem;
+import org.jcmpj.view.Quesitos;
 
 /**
  *
@@ -14,6 +19,8 @@ import javax.swing.JInternalFrame;
 public class WindowManager {
 
     private static JDesktopPane jDesktopPane;
+    private boolean flagGlabalSaveAll = false;
+    private ArrayList<JInternalFrame> saveList;
 
     public WindowManager(JDesktopPane jDesktopPane) {
 
@@ -26,7 +33,16 @@ public class WindowManager {
             jInternalFrame.requestFocusInWindow();
         } else {
             jDesktopPane.add(jInternalFrame);
-            jInternalFrame.setVisible(true);            
+            jInternalFrame.setVisible(true);
         }
     }
+
+    public boolean isFlagGlabalSaveAll() {
+        return flagGlabalSaveAll;
+    }
+
+    public void setFlagGlabalSaveAll(boolean flagGlabalSaveAll) {
+        this.flagGlabalSaveAll = flagGlabalSaveAll;
+    }
+
 }

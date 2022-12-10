@@ -50,6 +50,21 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }
 
+    public void saveAllWindows() {
+        if (Listagem.getInstance().isVisible()) {
+            Listagem.getInstance().saveAll();
+        }
+        if (Atividades.getInstance().isVisible()) {
+            Atividades.getInstance().saveAll();
+        }
+        if (Acompanhantes.getInstance().isVisible()) {
+            Acompanhantes.getInstance().saveAll();
+        }
+        if (Quesitos.getInstance().isVisible()) {
+            Quesitos.getInstance().saveAll();
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -88,6 +103,11 @@ public class MainWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de gerenciamento de Laudos Periciais Trabalhistas");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         desktopPane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -130,7 +150,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         btnAbrirLaudo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnAbrirLaudo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/jcmpj/view/images/novo-documento-32.png"))); // NOI18N
+        btnAbrirLaudo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/jcmpj/view/images/documento-32.png"))); // NOI18N
         btnAbrirLaudo.setText("Abrir Laudo");
         btnAbrirLaudo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 153)));
         btnAbrirLaudo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -214,7 +234,7 @@ public class MainWindow extends javax.swing.JFrame {
         arquivoMenu.setMnemonic('f');
         arquivoMenu.setText("Arquivo");
 
-        alterarSenhaMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/jcmpj/view/images/password_account_security_reset_safety_icon.png"))); // NOI18N
+        alterarSenhaMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/jcmpj/view/images/password_reset_icon.png"))); // NOI18N
         alterarSenhaMenuItem.setText("Alterar Senha");
         alterarSenhaMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -238,6 +258,7 @@ public class MainWindow extends javax.swing.JFrame {
         laudosMenu.setMnemonic('e');
         laudosMenu.setText("Laudos");
 
+        laudosMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/jcmpj/view/images/dados_basicos-02_icon.png"))); // NOI18N
         laudosMenuItem.setMnemonic('t');
         laudosMenuItem.setText("Dados básicos");
         laudosMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -247,6 +268,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
         laudosMenu.add(laudosMenuItem);
 
+        atividadesMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/jcmpj/view/images/labor_icon.png"))); // NOI18N
         atividadesMenuItem.setMnemonic('y');
         atividadesMenuItem.setText("Atividades");
         atividadesMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -256,6 +278,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
         laudosMenu.add(atividadesMenuItem);
 
+        acompanhantesMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/jcmpj/view/images/friends_icon.png"))); // NOI18N
         acompanhantesMenuItem.setText("Acompanhantes");
         acompanhantesMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -264,8 +287,9 @@ public class MainWindow extends javax.swing.JFrame {
         });
         laudosMenu.add(acompanhantesMenuItem);
 
+        atualizarMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/jcmpj/view/images/data_table_icon_24.png"))); // NOI18N
         atualizarMenuItem.setMnemonic('p');
-        atualizarMenuItem.setText("Atualizar tabela dados");
+        atualizarMenuItem.setText("Recarregar banco atualizado");
         atualizarMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 atualizarMenuItemActionPerformed(evt);
@@ -273,6 +297,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
         laudosMenu.add(atualizarMenuItem);
 
+        deleteMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/jcmpj/view/images/database_import_icon_24.png"))); // NOI18N
         deleteMenuItem.setMnemonic('d');
         deleteMenuItem.setText("Atualizar o banco de dados");
         deleteMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -291,7 +316,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        abrirDocumentoMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/jcmpj/view/images/novo-documento-32.png"))); // NOI18N
+        abrirDocumentoMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/jcmpj/view/images/documento-32.png"))); // NOI18N
         abrirDocumentoMenuItem.setText("Abrir Laudo");
         abrirDocumentoMenuItem.setEnabled(false);
         abrirDocumentoMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -306,6 +331,7 @@ public class MainWindow extends javax.swing.JFrame {
         sobreMenu.setMnemonic('h');
         sobreMenu.setText("Sobre");
 
+        usuarioMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/jcmpj/view/images/user-01_icon.png"))); // NOI18N
         usuarioMenu.setMnemonic('c');
         usuarioMenu.setText("Usuário");
         usuarioMenu.addActionListener(new java.awt.event.ActionListener() {
@@ -315,8 +341,9 @@ public class MainWindow extends javax.swing.JFrame {
         });
         sobreMenu.add(usuarioMenu);
 
+        aboutMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/jcmpj/view/images/about-1_icon.png"))); // NOI18N
         aboutMenuItem.setMnemonic('a');
-        aboutMenuItem.setText("About");
+        aboutMenuItem.setText("Sobre");
         sobreMenu.add(aboutMenuItem);
 
         menuBar.add(sobreMenu);
@@ -343,7 +370,16 @@ public class MainWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
-        System.exit(0);
+        Object[] options = {"Salvar", "Sair sem salvar", "Cancelar"};
+        int op;
+        op = JOptionPane.showOptionDialog(null, "Salvar Dados?", "Operação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+        System.out.println("Op Selecionada: " + op);
+        if (op == 0) {
+            saveAllWindows();
+            System.exit(0);
+        } else if (op == 1) {
+            System.exit(0);
+        }
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void laudosMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_laudosMenuItemActionPerformed
@@ -408,21 +444,24 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void usuarioMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioMenuActionPerformed
         DadosUsuario dadosUsuario = new DadosUsuario(this, true);
-        Color backColor = new Color(254,254,254);
+        Color backColor = new Color(254, 254, 254);
         dadosUsuario.getContentPane().setBackground(backColor);
         String cpf = Global.getUserName();
         dadosUsuario.lblCPF.setText(cpf);
         dadosUsuario.lblNOME.setText(Global.getName());
-        
+
         /**
          * Formatar para apresentação a data de validade(expiração) da licença
          */
-        String valid =Long.toString(Global.getExpires());
-        String[] amd = valid.split("-");
-        String dma = amd[2] + "/" + amd[1] + "/" + amd[0];        
+        String validade = Global.getPerExpires();
+        String[] amd = validade.split("-");
+        String dia = amd[2];
+        String mes = amd[1];
+        String ano = amd[0];
+        String dma = dia + "/" + mes + "/" + ano;
         dadosUsuario.lblVALID.setText(dma);
-        
-        dadosUsuario.lblSERIAL.setText(Global.getSerial());        
+
+        dadosUsuario.lblSERIAL.setText(Global.getSerial());
         dadosUsuario.setVisible(true);
     }//GEN-LAST:event_usuarioMenuActionPerformed
 
@@ -430,6 +469,19 @@ public class MainWindow extends javax.swing.JFrame {
         AlterarSenha as = new AlterarSenha(this, true);
         as.setVisible(true);
     }//GEN-LAST:event_alterarSenhaMenuItemActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        Object[] options = {"Salvar", "Sair sem salvar", "Cancelar"};
+        int op;
+        op = JOptionPane.showOptionDialog(null, "Salvar Dados?", "Operação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+        System.out.println("Op Selecionada: " + op);
+        if (op == 0) {
+            saveAllWindows();
+            System.exit(0);
+        } else if (op == 1) {
+            System.exit(0);
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

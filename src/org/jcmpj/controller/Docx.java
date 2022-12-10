@@ -37,7 +37,7 @@ public class Docx {
         String pathToModel = System.getProperty("user.dir") + File.separator + "modelo_laudo.docx";
 
         document = new Document(pathToModel);
-        
+
         String np = rs.getString("numProcesso").replaceAll("-", " - ");
         document.replace("#processo", np, false, true);
         document.replace("#reclamante", rs.getString("nomeReclamante"), false, true);
@@ -121,7 +121,13 @@ public class Docx {
             dataFile.mkdirs();
         }
 
-        String strOut = arquivoLaudo + rs.getString("numProcesso") + ".docx";
+        String[] aux1 = rs.getString("numProcesso").split(" ");
+        /**
+         * É prcisso retirar os espaçoes em branco pois causam erro na linha:
+         * Process exec = Runtime.getRuntime().exec(comando);
+         */
+        // String strOut = arquivoLaudo + rs.getString("numProcesso") + ".docx";
+        String strOut = arquivoLaudo + aux1[0] + aux1[1] + aux1[2] + ".docx";
         document.saveToFile(strOut, FileFormat.Docx_2013);
 
         try {
@@ -163,11 +169,12 @@ public class Docx {
         // System.out.println(dataEmissao);
         return dataEmissao;
     }
-    
+
     /**
      * Transforma o formato da data de yyy-mm-dd para dd/mm/aa
+     *
      * @param data
-     * @return 
+     * @return
      */
     private static String builFormDate(String data) {
         String dia, mes, ano;
@@ -194,9 +201,9 @@ public class Docx {
     }
 
     private static String pathToNewDoc() throws SQLException {
-        if (pathToDoc == null) {
+        // if (pathToDoc == null) {
             pathToDoc = buildPathToDoc(rs.getString("dataVistoria"));
-        }
+        // }
         StringBuilder path = new StringBuilder();
         path.append(Global.getPathDoc()); // C:\\User\\user\\Documents ou /home/user/Documentos
         path.append(File.separator);

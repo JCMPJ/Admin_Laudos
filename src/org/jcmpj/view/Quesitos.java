@@ -5,13 +5,14 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 import org.jcmpj.controller.PreencherForm;
 import org.jcmpj.model.DBManager;
+import org.jcmpj.resources.IsNotSaveAll;
 import org.jcmpj.resources.WindowManager;
 
 /**
  *
  * @author jcmpj
  */
-public class Quesitos extends javax.swing.JInternalFrame {
+public class Quesitos extends javax.swing.JInternalFrame implements IsNotSaveAll {
 
     private WindowManager windowManager;
     private String id;
@@ -35,6 +36,7 @@ public class Quesitos extends javax.swing.JInternalFrame {
     }
 
     private void loadInitialData() {
+
         Map<String, String> dl = PreencherForm.getLaudoIdNumProcesso();
 
         id = dl.get("id");
@@ -66,7 +68,7 @@ public class Quesitos extends javax.swing.JInternalFrame {
         txtAreaQuesitosReclamante.setText(txt.get("quesitosReclamante"));
         txtAreaQuesitosReclamada.setText(txt.get("quesitosReclamada"));
     }
-    
+
     private void addLineBreak(int c, String anterior, String txtArea) {
         String txt = anterior.trim() + "\n";
         //txt = txt.trim();
@@ -78,16 +80,28 @@ public class Quesitos extends javax.swing.JInternalFrame {
             }
         }
     }
-    
-    private void saveText() {
+
+    private void saveText(boolean saveAll) {
         boolean up;
         up = DBManager.updateQuesitos(txtAreaQuesitosReclamante.getText(), txtAreaQuesitosReclamada.getText(), Integer.parseInt(id));
-        if (up) {
+        if (up && !saveAll) {
             JOptionPane.showMessageDialog(null, "Texto Atualizados\nno banco de dados", "Update", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, "Erro\nbanco de dados", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        /**
+         * else { JOptionPane.showMessageDialog(null, "Erro\nbanco de dados",
+         * "Error", JOptionPane.ERROR_MESSAGE); }
+         */
     }
+
+    /**
+     * Variavel utilizada para salvar os dados ao fechar o aplicativo
+     * windowManager.setFlagGlabalSaveAll(true);
+     *
+     * if (windowManager == null) { windowManager = new
+     * WindowManager(getDesktopPane()); }
+     * windowManager.setFlagGlabalSaveAll(true);
+     *
+     */
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -176,7 +190,7 @@ public class Quesitos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarAtividadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarAtividadesActionPerformed
-        saveText();
+        saveText(false);
     }//GEN-LAST:event_btnSalvarAtividadesActionPerformed
 
     private void txtAreaQuesitosReclamanteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAreaQuesitosReclamanteKeyReleased
@@ -196,4 +210,10 @@ public class Quesitos extends javax.swing.JInternalFrame {
     private javax.swing.JTextArea txtAreaQuesitosReclamada;
     private javax.swing.JTextArea txtAreaQuesitosReclamante;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void saveAll() {
+        // throw new UnsupportedOperationException("Not supported yet.");
+        saveText(true);
+    }
 }

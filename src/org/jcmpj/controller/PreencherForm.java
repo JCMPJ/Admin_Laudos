@@ -14,6 +14,7 @@ import org.jcmpj.view.Listagem;
  * @author jcmpj
  */
 public class PreencherForm {
+
     public static Map<String, String> arrRet;
     static Listagem formData;
     static Laudo laudo;
@@ -21,20 +22,22 @@ public class PreencherForm {
     public PreencherForm(Listagem formData) {
         PreencherForm.formData = formData;
     }
+
     /**
-     * 
+     *
      * @return Id e numProcesso
      */
     public static Map<String, String> getLaudoIdNumProcesso() {
         arrRet = new HashMap<>();
-        
+
         arrRet.put("id", Integer.toString(laudo.getId()));
         arrRet.put("numProcesso", laudo.getNumProcesso());
         arrRet.put("nomeReclamante", laudo.getNomeReclamante());
         arrRet.put("nomeReclamada", laudo.getNomeReclamada());
-        
+
         return arrRet;
     }
+
     /**
      *
      * @description Preenche os campos do formulário dados básicos do laudo.
@@ -80,76 +83,73 @@ public class PreencherForm {
             dma = dia + "/" + mes + "/" + ano;
             formData.txtDataVistoria.setText(dma);
         } else {
-            formData.txtDataVistoria.setText(null);            
+            formData.txtDataVistoria.setText(null);
         }
-        
+
         if (!(dadosLinha.get("horaVistoria") == null)) {
             String horaVistoria = dadosLinha.get("horaVistoria").toString();
-            formData.txtHoraVistoria.setText(horaVistoria);            
+            formData.txtHoraVistoria.setText(horaVistoria);
         } else {
-            formData.txtHoraVistoria.setText(null);            
+            formData.txtHoraVistoria.setText(null);
         }
 
         if (!(dadosLinha.get("localVistoria") == null)) {
             String localVistoria = dadosLinha.get("localVistoria").toString();
-            formData.txtLocalVistoria.setText(localVistoria);            
+            formData.txtLocalVistoria.setText(localVistoria);
         } else {
-            formData.txtLocalVistoria.setText(null);            
+            formData.txtLocalVistoria.setText(null);
         }
         // ENDEREÇO
         if (!(dadosLinha.get("enderecoVistoria") == null)) {
             String localVistoria = dadosLinha.get("enderecoVistoria").toString();
             formData.txtEnderecoVistoria.setText(localVistoria);
-            
+
         } else {
             formData.txtEnderecoVistoria.setText(null);
-            
+
         }
         // PERÍODO
         if (!(dadosLinha.get("periodoReclamado") == null)) {
             String localVistoria = dadosLinha.get("periodoReclamado").toString();
             formData.txtPeriodoReclamado.setText(localVistoria);
-            
+
         } else {
             formData.txtPeriodoReclamado.setText(null);
-            
+
         }
         // FUNÇÃO
         if (!(dadosLinha.get("funcaoExercida") == null)) {
             String localVistoria = dadosLinha.get("funcaoExercida").toString();
             formData.txtFuncaoExercida.setText(localVistoria);
-            
+
         } else {
             formData.txtFuncaoExercida.setText(null);
-            
+
         }
     }
-    
-    public String sqLiteDate(String date) {        
+
+    public String sqLiteDate(String date) {
         String[] dma = date.split("/");
         String dia = dma[0];
         String mes = dma[1];
         String ano = dma[2];
         String amd = ano + "-" + mes + "-" + dia;
-        
+
         return amd;
     }
+
     /**
-     * 
-     * 000(0) - Sem atualização;
-     * 001(1) - Atualiza a data;
-     * 010(2) - Atualiza a hora;
-     * 100(4) - Atualiza o local
-     * 011(3) - Atualiza a data E a hora;
-     * 101(5) - Atualiza a data E o local;
-     * 110(6) - Atualiza a hora E o local;
-     * 111(7) - Atualiza a data, a hora e o local;
-     * 
+     *
+     * 000(0) - Sem atualização; 001(1) - Atualiza a data; 010(2) - Atualiza a
+     * hora; 100(4) - Atualiza o local 011(3) - Atualiza a data E a hora; 101(5)
+     * - Atualiza a data E o local; 110(6) - Atualiza a hora E o local; 111(7) -
+     * Atualiza a data, a hora e o local;
+     *
      */
-    public void saveFormData() {
+    public void saveFormData(boolean saveAll) {
         int row = formData.tblProcessos.getSelectedRow();
         Map dadosLinha = formData.procs.get(row);
-        
+
         Map<String, String> dadosUpdate = new HashMap<>();
         int fieldsForUpdate = 0;
         boolean up;
@@ -158,7 +158,7 @@ public class PreencherForm {
                 && !formData.txtDataVistoria.getText().isEmpty()
                 && ((dadosLinha.get("dataVistoria") == null)
                 || !formData.txtDataVistoria.getText().equals(dadosLinha.get("dataVistoria").toString()))) {
-            
+
             fieldsForUpdate += 1;
             dadosUpdate.put("dataVistoria", sqLiteDate(formData.txtDataVistoria.getText()));
             //up = DBManager.updateByFieldAndValue("dataVistoria", formData.txtDataVistoria.getText(), (int) dadosLinha.get("id"));
@@ -168,7 +168,7 @@ public class PreencherForm {
                 && !formData.txtHoraVistoria.getText().isEmpty()
                 && ((dadosLinha.get("horaVistoria") == null)
                 || !formData.txtHoraVistoria.getText().equals(dadosLinha.get("horaVistoria").toString()))) {
-            
+
             fieldsForUpdate += 2;
             dadosUpdate.put("horaVistoria", formData.txtHoraVistoria.getText());
             //up = DBManager.updateByFieldAndValue("horaVistoria", formData.txtHoraVistoria.getText(), (int) dadosLinha.get("id"));
@@ -178,34 +178,31 @@ public class PreencherForm {
                 && !formData.txtLocalVistoria.getText().isEmpty()
                 && ((dadosLinha.get("localVistoria") == null)
                 || !formData.txtLocalVistoria.getText().equals(dadosLinha.get("localVistoria").toString()))) {
-            
+
             fieldsForUpdate += 4;
             dadosUpdate.put("localVistoria", formData.txtLocalVistoria.getText());
             //up = DBManager.updateByFieldAndValue("localVistoria", formData.txtLocalVistoria.getText(), (int) dadosLinha.get("id"));
-        }        
+        }
         // ENDEREÇO VISTORIA
         if (formData.txtEnderecoVistoria.getText() != null
-                && !formData.txtEnderecoVistoria.getText().isEmpty()
-                ) {
-            
+                && !formData.txtEnderecoVistoria.getText().isEmpty()) {
+
             DBManager.updateByFieldAndValue("enderecoVistoria", formData.txtEnderecoVistoria.getText(), (int) dadosLinha.get("id"));
         }
         // PERIODO RECLAMADO
         if (formData.txtPeriodoReclamado.getText() != null
-                && !formData.txtPeriodoReclamado.getText().isEmpty()
-                ) {
-            
+                && !formData.txtPeriodoReclamado.getText().isEmpty()) {
+
             DBManager.updateByFieldAndValue("periodoReclamado", formData.txtPeriodoReclamado.getText(), (int) dadosLinha.get("id"));
         }
         // FUNÇÃO EXERCIDA
         if (formData.txtFuncaoExercida.getText() != null
-                && !formData.txtFuncaoExercida.getText().isEmpty()
-                ) {
-            
+                && !formData.txtFuncaoExercida.getText().isEmpty()) {
+
             DBManager.updateByFieldAndValue("funcaoExercida", formData.txtFuncaoExercida.getText(), (int) dadosLinha.get("id"));
         }
         up = DBManager.updateFields(fieldsForUpdate, dadosUpdate, (int) dadosLinha.get("id"));
-        if (up) {
+        if (up && !saveAll) {
             JOptionPane.showMessageDialog(null, "Dados atualizados.", "Update!", JOptionPane.INFORMATION_MESSAGE);
         }
     }

@@ -8,13 +8,14 @@ import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import org.jcmpj.controller.PreencherForm;
 import org.jcmpj.model.DBManager;
+import org.jcmpj.resources.IsNotSaveAll;
 import org.jcmpj.resources.WindowManager;
 
 /**
  *
  * @author jcmpj
  */
-public class Listagem extends javax.swing.JInternalFrame {
+public class Listagem extends javax.swing.JInternalFrame implements IsNotSaveAll {
 
     private WindowManager windowManager;
     private static Listagem listagem;
@@ -88,7 +89,7 @@ public class Listagem extends javax.swing.JInternalFrame {
         tblProcessos.getColumnModel().getColumn(2).setPreferredWidth(400);
         tblProcessos.getColumnModel().getColumn(3).setPreferredWidth(400);
     }
-    
+
     public void loadTableDateFilter(String dateStart, String dateEnd) {
         DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Processo", "Reclamante", "Reclamada"}, 0);
         try {
@@ -587,7 +588,7 @@ public class Listagem extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblProcessosMouseClicked
 
     private void btnSalvarAlteracoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarAlteracoesActionPerformed
-        pf.saveFormData();
+        pf.saveFormData(false);
 
     }//GEN-LAST:event_btnSalvarAlteracoesActionPerformed
 
@@ -595,7 +596,9 @@ public class Listagem extends javax.swing.JInternalFrame {
         if (windowManager == null) {
             windowManager = new WindowManager(getDesktopPane());
         }
+        windowManager.setFlagGlabalSaveAll(true);
         windowManager.openWindow(Atividades.getInstance());
+
     }//GEN-LAST:event_btnProximoActionPerformed
 
     private void txtBuscaReclamadaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscaReclamadaKeyReleased
@@ -653,4 +656,10 @@ public class Listagem extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField txtdateEnd;
     private javax.swing.JFormattedTextField txtdateStart;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void saveAll() {
+        //throw new UnsupportedOperationException("Not supported yet.");
+        pf.saveFormData(true);
+    }
 }

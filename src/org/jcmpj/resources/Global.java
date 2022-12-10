@@ -248,13 +248,26 @@ public class Global {
         //System.out.println("per.password:: " + prop.getProperty("per.password"));
         return prop.getProperty("per.serial");
     }
+    
+    public static String getPerExpires() {
+        LoadResources loadResources = new LoadResources();
+        Properties prop = loadResources.loadPropertiesFile("per.properties");
+        
+        return prop.getProperty("per.expires");
+    }
 
     public static long getExpires() {
         LocalDate agora = LocalDate.now();
-        LocalDate fi = LocalDate.of(2022, 12, 31);
+        // LocalDate fi = LocalDate.of(2022, 11, 25);
+        String validade = Global.getPerExpires();
+        String[] amd = validade.split("-");
+        int dia = Integer.parseInt(amd[2]);
+        int mes = Integer.parseInt(amd[1]);
+        int ano = Integer.parseInt(amd[0]);
+        LocalDate fi = LocalDate.of(ano, mes, dia);
 
-        long dia = DAYS.between(agora, fi);
+        long diaD = DAYS.between(agora, fi);
 
-        return dia;
+        return diaD;
     }
 }

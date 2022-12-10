@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import org.jcmpj.controller.AcessarWeb;
 import org.jcmpj.controller.AtualizarBancoDados;
 import org.jcmpj.model.DBManager;
@@ -138,9 +139,8 @@ public class Inicio extends javax.swing.JFrame {
         pb01 = new javax.swing.JProgressBar();
         btnNaoAtualizar = new javax.swing.JButton();
         btnAtualizar = new javax.swing.JButton();
-        lblValidade = new javax.swing.JLabel();
+        lblVencimento = new javax.swing.JLabel();
         lblTempoExp = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Laudos TRT");
@@ -177,18 +177,12 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
-        lblValidade.setForeground(new java.awt.Color(0, 102, 102));
-        lblValidade.setText("<html>Licença válida até: <b>31/12/2022<b/></html>");
+        lblVencimento.setText("Vencimento");
+        lblVencimento.setMaximumSize(new java.awt.Dimension(180, 16));
+        lblVencimento.setMinimumSize(new java.awt.Dimension(180, 16));
+        lblVencimento.setPreferredSize(new java.awt.Dimension(180, 16));
 
-        lblTempoExp.setForeground(new java.awt.Color(0, 102, 102));
         lblTempoExp.setText("Falta 45 dias para o fim da licença.");
-
-        jButton1.setText("Alterar Senha");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -196,6 +190,9 @@ public class Inicio extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 6, Short.MAX_VALUE)
+                        .addComponent(lblTempoExp, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,19 +200,7 @@ public class Inicio extends javax.swing.JFrame {
                             .addComponent(btnNaoAtualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(pb01, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtAtualizando, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(lblTempoExp)
-                                .addGap(232, 232, 232))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(158, 158, 158)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lblValidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(lblVencimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -229,13 +214,11 @@ public class Inicio extends javax.swing.JFrame {
                 .addComponent(pb01, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(48, 48, 48)
                 .addComponent(btnNaoAtualizar)
-                .addGap(47, 47, 47)
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
-                .addComponent(lblValidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(71, 71, 71)
+                .addComponent(lblVencimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblTempoExp)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         setBounds(200, 200, 440, 341);
@@ -248,13 +231,7 @@ public class Inicio extends javax.swing.JFrame {
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
         atualizarDados();
     }//GEN-LAST:event_btnAtualizarActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        AlterarSenha as = new AlterarSenha(this, false);
-        as.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        as.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
+/**/
     /**
      * @param args the command line arguments
      */
@@ -291,9 +268,8 @@ public class Inicio extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtualizar;
     private javax.swing.JButton btnNaoAtualizar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel lblTempoExp;
-    private javax.swing.JLabel lblValidade;
+    private javax.swing.JLabel lblVencimento;
     private javax.swing.JProgressBar pb01;
     private javax.swing.JLabel txtAtualizando;
     // End of variables declaration//GEN-END:variables
@@ -306,10 +282,27 @@ public class Inicio extends javax.swing.JFrame {
         prop.setProperty("per.serial", "951/2022");
         
         setExpires();
+        setgetPerExpires();
+    }
+    
+    private void setgetPerExpires() {
+        String validade = Global.getPerExpires();
+        String[] amd = validade.split("-");
+        String dia = amd[2];
+        String mes = amd[1];
+        String ano = amd[0];
+        String dma = dia + "/" + mes + "/" + ano;
+        lblVencimento.setText("<html>Sua licença vale até o dia: <b>" + dma + "</b>.</html>");
+        
     }
     
     private void setExpires() {
-        String dias = Long.toString(Global.getExpires());
-        lblTempoExp.setText("<html>Faltam <b>" + dias + "</b> dias para o fim da licença.</html>");
+        String dias = Long.toString(Math.abs(Global.getExpires()));
+        // Long dias_pos = Math.abs(Global.getExpires());
+        
+        if(Global.getExpires() < 0) {
+            JOptionPane.showMessageDialog(null, "Sua licença venceu.\nEntre em contato com o desenvolvedor,\npara renová-la", "Licença", JOptionPane.INFORMATION_MESSAGE);
+        }
+        lblTempoExp.setText("<html><b>" + dias + "</b> dias já se passaram do vencimento.</html>");
     }
 }

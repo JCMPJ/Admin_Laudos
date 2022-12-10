@@ -2,9 +2,11 @@ package org.jcmpj.view;
 
 import java.awt.event.KeyEvent;
 import java.util.Map;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import org.jcmpj.controller.PreencherForm;
 import org.jcmpj.model.DBManager;
+import org.jcmpj.resources.IsNotSaveAll;
 import org.jcmpj.resources.WindowManager;
 
 /**
@@ -66,7 +68,7 @@ public class Acompanhantes extends javax.swing.JInternalFrame {
         txtAreaReclamante.setText(txt.get("acompanhantesReclamante"));
         txtAreaReclamada.setText(txt.get("acompanhantesReclamada"));
     }
-    
+
     private void addLineBreak(int c, String anterior, String txtArea) {
         String txt = anterior.trim() + "\n";
         //txt = txt.trim();
@@ -78,15 +80,17 @@ public class Acompanhantes extends javax.swing.JInternalFrame {
             }
         }
     }
-    
-    private void saveText() {
+
+    public void saveText(boolean saveAll) {
         boolean up;
         up = DBManager.updateSafeguard(txtAreaReclamante.getText(), txtAreaReclamada.getText(), Integer.parseInt(id));
-        if (up) {
+        if (up && !saveAll) {
             JOptionPane.showMessageDialog(null, "Texto Atualizados\nno banco de dados", "Update", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, "Erro\nbanco de dados", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        /**
+         * else { JOptionPane.showMessageDialog(null, "Erro\nbanco de dados",
+         * "Error", JOptionPane.ERROR_MESSAGE); }
+         */
     }
 
     /**
@@ -184,7 +188,7 @@ public class Acompanhantes extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarAtividadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarAtividadesActionPerformed
-        saveText();
+        saveText(false);
     }//GEN-LAST:event_btnSalvarAtividadesActionPerformed
 
     private void txtAreaReclamanteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAreaReclamanteKeyReleased
@@ -199,7 +203,9 @@ public class Acompanhantes extends javax.swing.JInternalFrame {
         if (windowManager == null) {
             windowManager = new WindowManager(getDesktopPane());
         }
+        windowManager.setFlagGlabalSaveAll(true);
         windowManager.openWindow(Quesitos.getInstance());
+
     }//GEN-LAST:event_btnProximoQuesitosActionPerformed
 
 
@@ -212,4 +218,10 @@ public class Acompanhantes extends javax.swing.JInternalFrame {
     private javax.swing.JTextArea txtAreaReclamada;
     private javax.swing.JTextArea txtAreaReclamante;
     // End of variables declaration//GEN-END:variables
+
+    
+    public void saveAll() {
+        //throw new UnsupportedOperationException("Not supported yet.");
+        saveText(true);
+    }
 }
